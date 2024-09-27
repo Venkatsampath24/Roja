@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useRef } from 'react';
+import './App.css'; // You can create your CSS styles here
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [showRose, setShowRose] = useState(false);
+    const audioRef = useRef(null);
+
+    const handleClick = () => {
+        setShowRose(true);
+        if (audioRef.current) {
+            audioRef.current.play(); // Play music when the rose is shown
+        }
+    };
+
+    const handleClose = () => {
+        setShowRose(false);
+        if (audioRef.current) {
+            audioRef.current.pause(); // Pause music when the rose is closed
+            audioRef.current.currentTime = 0; // Reset the music to the start
+        }
+    };
+
+    return (
+        <div className="App">
+            <h1>🌹 Surprise for You, Roja!</h1>
+            <button onClick={handleClick}>Click here to see Surprise!!!!!</button>
+
+            {showRose && (
+                <div className="modal">
+                    <span className="close" onClick={handleClose}>&times;</span>
+                    <img src="Roja.gif" alt="Animated Rose" className="rose-gif" />
+                    <h1>Just like this rose blooms beautifully!</h1>
+                </div>
+            )}
+
+            {/* Add the audio element */}
+            <audio ref={audioRef} src="Rojabgm.mp3" />
+        </div>
+    );
 }
 
 export default App;
