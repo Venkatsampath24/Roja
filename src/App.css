@@ -1,60 +1,41 @@
-.modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 40px;
-  border: 2px solid #ff69b4;
-  z-index: 1;
-  width: 80%; /* Set to 80% for responsive width */
-  max-width: 850px; /* Maximum width for larger screens */
-  height: auto; /* Height adjusts based on content */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; /* Optional: Rounded corners */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-.close {
-  align-self: flex-end;
-  cursor: pointer;
-  font-size: 24px;
-  margin-bottom: 10px;
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
 
-.rose-gif {
-  width: 100%; /* Full width for responsive design */
-  max-width: 900px; /* Maximum width for larger screens */
-  height: auto; /* Maintain aspect ratio */
-  margin-bottom: 20px;
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .modal {
-    padding: 20px; /* Adjust padding for smaller screens */
-    width: 90%; /* Make it wider on mobile */
-    max-width: none; /* Remove maximum width */
-  }
-
-  .rose-gif {
-    max-width: 100%; /* Allow the image to be full width */
-  }
+.pulse-button {
+  animation: pulse 2s infinite;
 }
 
-@media (max-width: 480px) {
-  .close {
-    font-size: 20px; /* Smaller close button on mobile */
-  }
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
 
-  .modal {
-    padding: 15px; /* Further reduce padding on very small screens */
-  }
+.sparkle-bg:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 25px 25px;
+  opacity: 0.4;
+  animation: sparkle 3s infinite alternate;
+  z-index: 0;
+}
 
-  h1 {
-    font-size: 1.5em; /* Smaller text on mobile */
-  }
+.rose-glow {
+  filter: drop-shadow(0 0 10px rgba(246, 68, 184, 0.7));
 }
